@@ -10,22 +10,27 @@ import hashlib
 # Account permissions: read:Followers, read:Starring, read:Watching
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
+
 HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN_2']}
-USER_NAME = os.environ['USER_NAME'] # 'Andrew6rant'
+USER_NAME = os.environ['USER_NAME']
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 
+def daily(date):
+    diff = relativedelta.relativedelta(datetime.datetime.today(), date)
+    formatted_date = '{} {}, {} {}, {} {}'.format(
+        diff.years, 'year' + format_plural(diff.years), 
+        diff.months, 'month' + format_plural(diff.months), 
+        diff.days, 'day' + format_plural(diff.days))
+    return {'formatted_date': formatted_date, 'diff': diff, }
 
 def daily_readme(birthday):
     """
     Returns the length of time since I was born
     e.g. 'XX years, XX months, XX days'
     """
-    diff = relativedelta.relativedelta(datetime.datetime.today(), birthday)
-    return '{} {}, {} {}, {} {}{}'.format(
-        diff.years, 'year' + format_plural(diff.years), 
-        diff.months, 'month' + format_plural(diff.months), 
-        diff.days, 'day' + format_plural(diff.days),
-        ' 🎂' if (diff.months == 0 and diff.days == 0) else '')
+    formatted_date, diff = daily(birthday).values()
+    return formatted_date + (' 🎂' if (diff.months == 0 and diff.days == 0) else '')
+        
 
 
 def format_plural(unit):
@@ -316,22 +321,26 @@ def stars_counter(data):
     return total_stars
 
 
-def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib_data, follower_data, loc_data):
+def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib_data, follower_data, loc_data, job_data):
     """
     Parse SVG files and update elements with my age, commits, stars, repositories, and lines written
     """
     svg = minidom.parse(filename)
     f = open(filename, mode='w', encoding='utf-8')
     tspan = svg.getElementsByTagName('tspan')
+    print(tspan.length)
+    for index, tspan_element in enumerate(tspan):
+        print(index, tspan_element.firstChild)
     tspan[30].firstChild.data = age_data
-    tspan[59].firstChild.data = repo_data
-    tspan[61].firstChild.data = contrib_data
-    tspan[63].firstChild.data = commit_data
-    tspan[65].firstChild.data = star_data
-    tspan[67].firstChild.data = follower_data
-    tspan[69].firstChild.data = loc_data[2]
-    tspan[70].firstChild.data = loc_data[0] + '++'
-    tspan[71].firstChild.data = loc_data[1] + '--'
+    tspan[33].firstChild.data = job_data
+    tspan[63].firstChild.data = repo_data
+    tspan[65].firstChild.data = contrib_data
+    tspan[67].firstChild.data = commit_data
+    tspan[69].firstChild.data = star_data
+    tspan[71].firstChild.data = follower_data
+    tspan[73].firstChild.data = loc_data[2]
+    tspan[74].firstChild.data = loc_data[0] + '++'
+    tspan[75].firstChild.data = loc_data[1] + '--'
     f.write(svg.toxml('utf-8').decode('utf-8'))
     f.close()
 
@@ -435,6 +444,9 @@ if __name__ == '__main__':
     OWNER_ID, acc_date = user_data
     formatter('account data', user_time)
     age_data, age_time = perf_counter(daily_readme, datetime.datetime(2001, 10, 29))
+    job_data = daily(datetime.datetime(2022,1,1))['formatted_date']
+    print("job_data:")
+    print(job_data)
     formatter('age calculation', age_time)
     total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], 7)
     formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
@@ -460,8 +472,8 @@ if __name__ == '__main__':
 
     for index in range(len(total_loc)-1): total_loc[index] = '{:,}'.format(total_loc[index]) # format added, deleted, and total LOC
 
-    svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
-    svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1], job_data)
+    svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1], job_data)
 
     # move cursor to override 'Calculation times:' with 'Total function time:' and the total function time, then move cursor back
     print('\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F',
