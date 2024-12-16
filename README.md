@@ -1,13 +1,6 @@
 
 
 
-<a href="https://github.com/Andrew6rant/Andrew6rant">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ericaugusto-git/readme-Andrew6rant/main/dark_mode.svg">
-    <img alt="Andrew Grant's GitHub Profile README" src="https://raw.githubusercontent.com/ericaugusto-git/readme-Andrew6rant/main/light_mode.svg">
-  </picture>
-</a>
-
  <table align="left">
  <tr>
    <td style="text-align: center;">
@@ -26,12 +19,19 @@
    </td>
  </tr>
 </table>
+<a href="https://github.com/Andrew6rant/Andrew6rant">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ericaugusto-git/readme-Andrew6rant/main/dark_mode.svg">
+    <img alt="Andrew Grant's GitHub Profile README" src="https://raw.githubusercontent.com/ericaugusto-git/readme-Andrew6rant/main/light_mode.svg">
+  </picture>
+</a>
+
 
 <p align="center">
 Hello World 👋! I'm a remote Frontend Developer based in Brazil with 4+ years of experience as a coding enthusiast and 2+ years as an professional developer. Looking for problems to solve, if you're a problem you better watch out 😠
 </p>
 
-## 🗃 Projects
+## 🗃 Main Projects
 
 <div align="left">
    <a href="https://github.com/ericaugusto-git/discord-clone"><img src="https://github-readme-stats.vercel.app/api/pin/?username=ericaugusto-git&repo=discord-clone&theme=react&hide_border=true&show_icons=false" alt="Discord Clone" /></a>
@@ -54,23 +54,3 @@ Hello World 👋! I'm a remote Frontend Developer based in Brazil with 4+ years 
   </p>
 
   <br/>
-
-## ⚡ Stats 
-<p align="center">
-   <a href="https://github.com/anuraghazra/github-readme-stats">
-  <img alt="My Github Stats" src="https://github-readme-stats.vercel.app/api?username=ericaugusto-git&count_private=true&show_icons=true&theme=react&hide_border=true&bg_color=1F222E&title_color=61DAFB&icon_color=61DAFB&custom_title=Stats" height="192px"/>
-  </a>
-  <a href="https://github.com/anuraghazra/github-readme-stats">
-  <img alt="Eric Augusto's Top Languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ericaugusto-git&langs_count=8&layout=compact&theme=react&hide_border=true&bg_color=1F222E&title_color=61DAFB&icon_color=61DAFB" height="192px"/>
-  </a>
-<p align="center">  
-    <a href="http://github-readme-streak-stats.herokuapp.com">
-     <img alt="streaks" src="http://github-readme-streak-stats.herokuapp.com?user=ericaugusto-git&count_private=true&theme=react&hide_border=true&bg_color=1F222E&title_color=F85D7F&icon_color=F8D866">
-  </a>
-</p>
-</p>
-  
-<br/>
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=61DAFB&random=false&width=435&lines=Thanks+for+stopping+by!;See+ya+%5E_%5E" alt="Typing SVG" /></a>
-
-<center><img src="https://capsule-render.vercel.app/api?type=waving&color=61DAFB&height=200&section=footer&text=&fontSize=80&fontAlignY=35&animation=twinkling&fontColor=gradient" /></center>
